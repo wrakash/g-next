@@ -1,5 +1,6 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 interface CarouselProps {
@@ -34,10 +35,10 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
     }
   };
 
-  const handleNextSlide = () => {
+  const handleNextSlide = useCallback(() => {
     let newSlide = currentSlide === images.length - 1 ? 0 : currentSlide + 1;
     setCurrentSlide(newSlide);
-  };
+  },[])
 
   const handlePrevSlide = () => {
     let newSlide = currentSlide === 0 ? images.length - 1 : currentSlide - 1;
@@ -47,10 +48,10 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       handleNextSlide();
-    }, 3000); // Auto-scroll every 3 seconds
+    }, 3000); 
 
     return () => clearInterval(interval);
-  }, [currentSlide]); // Reset interval on slide change
+  }, [currentSlide]);
 
   return (
     <div className="w-full relative">
@@ -99,7 +100,7 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
               </a>
             );
           }
-          return null; // Added to satisfy React's rendering requirements
+          return <div/>
         })}
       </div>
 
