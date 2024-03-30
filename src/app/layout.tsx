@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Mukta } from "next/font/google";
 import "./globals.css";
+import { Header, Footer } from "@/components";
+import { Strip } from "@/components/Strip";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Mukta({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +21,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+
+      <body className={`w-screen min-h-screen ${roboto.className}`}>
+        <Strip />
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
