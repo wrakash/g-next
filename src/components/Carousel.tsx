@@ -100,7 +100,7 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
               </a>
             );
           }
-          return <div/>
+          return <></>
         })}
       </div>
 
